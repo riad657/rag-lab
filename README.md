@@ -22,3 +22,6 @@ Statut : Phase 1 terminée.
 | Version | Recall@3 | MRR | Date |
 |---|---|---|---|
 | Naïf (chunking fixe 500/50, embedding seul) | 0.633 | 0.522 | 2026-09-08 |
+| Chunking structurel (découpage par rubrique) | 0.767 | 0.656 | 2026-09-08 |
+
+**Décision 2.4** : nette progression du chunking structurel comparé au chunking naïf (+0.134 recall@3, +0.134 MRR) — on conserve le chunking structurel comme base pour la suite des améliorations (2.5, 2.6). Échecs restants (7/30) concentrés sur Amoxicilline/Augmentin, deux antibiotiques chimiquement proches — plus un problème de proximité sémantique légitime qu'un défaut de chunking, à traiter en 2.5/2.6.
