@@ -1,0 +1,31 @@
+id,question,medicament,passage_attendu
+1,Quelle est la posologie recommandée du Doliprane pour un adulte ?,01_doliprane,"1000mg soit 1g, ne pas prendre 2 comprimés à la fois, réservé dès 50kg, 4h minimum, max 3000mg/jour"
+2,Quelles sont les contre-indications du Kardegic ?,04_kardegic,"si vous êtes enceinte de 24 semaines d'aménorrhée et plus, si allergique à la substance active"
+3,Quelle est la posologie du Xanax ?,09_xanax,"réservé à l'adulte, posologie strictement individuelle, pas de dose usuelle définissable"
+4,Quelles sont les interactions médicamenteuses de l'Amoxicilline ?,08_amoxicilline,si votre enfant prend ou a pris récemment un autre médicament
+5,Quelles sont les interactions médicamenteuses de la Ventoline ?,12_ventoline,informez votre médecin ou pharmacien si vous prenez d'autres médicaments
+6,Quelles sont les interactions médicamenteuses de l'Amlor ?,15_amlor,informez votre médecin ou pharmacien si vous prenez ou avez récemment pris tout autre médicament
+7,Quelle est la posologie de l'Efferalgan ?,05_efferalgan,"1000mg de paracétamol par comprimé, ne pas prendre 2 comprimés à la fois"
+8,Quelle est la posologie de l'Oméprazole ?,07_omeprazole,"votre médecin vous dira le nombre de gélules à prendre et la durée du traitement, selon votre état de santé et votre âge"
+9,Quelle est la posologie du Spasfon ?,10_spasfon,"prendre 1 lyophilisat oral au moment de la crise, renouveler en respectant un intervalle minimum de 2 heures"
+10,Quelle est la posologie du Levothyrox ?,03_levothyrox,veillez à toujours prendre ce médicament en suivant exactement les indications de votre médecin ou pharmacien
+11,Quelles sont les contre-indications du Previscan ?,13_previscan,si vous êtes allergique à la fluindione ou à l'un des autres composants
+12,Quelles sont les contre-indications de l'Augmentin ?,14_augmentin,"si vous êtes allergique à l'amoxicilline, à l'acide clavulanique, à la pénicilline"
+13,Quelles sont les contre-indications du Levothyrox ?,03_levothyrox,si vous êtes allergique (hypersensible) à la substance active
+14,Quelle est la posologie du Previscan ?,13_previscan,veillez à toujours prendre ce médicament en suivant exactement les indications de votre médecin
+15,Quelles sont les contre-indications de l'Ibuprofène ?,06_ibuprofene,si vous êtes enceinte de 24 semaines d'aménorrhée et plus
+16,Quelles sont les interactions médicamenteuses de l'Efferalgan ?,05_efferalgan,"informez votre médecin ou pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+17,Quelles sont les interactions médicamenteuses de l'Oméprazole ?,07_omeprazole,"informez votre médecin ou pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+18,Quelles sont les interactions médicamenteuses du Spasfon ?,10_spasfon,"informez votre médecin ou pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+19,Quelles sont les interactions médicamenteuses du Xanax ?,09_xanax,"informez votre médecin ou pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+20,Quelles sont les interactions médicamenteuses du Previscan ?,13_previscan,"informez votre médecin ou pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+21,Quelles sont les interactions médicamenteuses de l'Augmentin ?,14_augmentin,"informez votre médecin ou votre pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+22,Quelles sont les interactions médicamenteuses du Levothyrox ?,03_levothyrox,"informez votre médecin, votre dentiste ou votre pharmacien si vous prenez, avez récemment pris"
+23,Quelles sont les interactions médicamenteuses du Dafalgan ?,02_dafalgan,"informez votre médecin ou votre pharmacien si vous prenez, avez récemment pris ou pourriez prendre"
+24,Quelles sont les interactions médicamenteuses de l'Ibuprofène ?,06_ibuprofene,"voir rubrique Autres médicaments, en cas de troubles de la vue prévenez votre médecin"
+25,Quelles sont les contre-indications du Doliprane ?,01_doliprane,si vous êtes allergique au paracétamol ou à l'un des autres composants
+26,Quelle est la posologie du Kardegic ?,04_kardegic,"réservé à l'adulte, dose habituelle 1 sachet par jour"
+27,Quelles sont les contre-indications du Xanax ?,09_xanax,si vous êtes allergique à l'alprazolam ou à l'un des autres composants
+28,Quelle est la posologie de l'Amoxicilline ?,08_amoxicilline,"adultes et enfants de 40 kg ou plus, suspension généralement non recommandée en dessous"
+29,Quelle est la posologie de l'Augmentin ?,14_augmentin,"adultes et enfants de 40 kg et plus, dose habituelle 1 sachet trois fois par jour"
+30,Quelle est la posologie de l'Ibuprofène ?,06_ibuprofene,adaptée à l'adulte et l'enfant à partir de 20 kg (environ 6 ans)

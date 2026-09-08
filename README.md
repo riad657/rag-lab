@@ -16,3 +16,9 @@ Statut : Phase 1 terminée.
 8. **Absence d'indication thérapeutique dans le contexte retrouvé** — Sur "mal de tête, dois-je prendre du Doliprane ?", le système a refusé de répondre : les chunks trouvés concernaient Efferalgan/Dafalgan (pas Doliprane) et aucun ne mentionnait "maux de tête" comme indication.
 9. **Retrieval totalement hors sujet sur Levothyrox** — Sur "à quoi sert le Levothyrox ?", alors que le document `03_levothyrox` existe bien dans la base (41 chunks indexés), le retrieval a renvoyé des chunks Kardegic et Dafalgan, sans aucun rapport.
 10. **Modèle d'embedding par défaut de Chroma non-multilingue** — Sans configuration explicite, Chroma utilise un modèle d'embedding anglais (`all-MiniLM-L6-v2`) par défaut, incohérent avec un corpus entièrement en français. Repéré et corrigé avant l'indexation finale (1.3d), mais un piège silencieux facile à manquer.
+
+## Tableau de métriques
+
+| Version | Recall@3 | MRR | Date |
+|---|---|---|---|
+| Naïf (chunking fixe 500/50, embedding seul) | 0.633 | 0.522 | 2026-09-08 |
