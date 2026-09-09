@@ -1,0 +1,50 @@
+import json
+
+exemples = [
+    {
+        "input": "Réservé à l'adulte et à l'enfant à partir de 50 kg (environ 15 ans). Utiliser la dose de 1000 mg en cas de douleurs et/ou fièvre non soulagées par une dose de 500 mg. Dose maximale par prise : 1000 mg. Intervalle entre deux doses : 4 heures minimum. Dose maximale par jour : 3000 mg.",
+        "output": {"medicament": "Doliprane 1000mg", "population": "adulte et enfant a partir de 50kg", "dose_max_prise": "1000 mg", "intervalle_minimum": "4 heures", "dose_max_jour": "3000 mg"}
+    },
+    {
+        "input": "Insuffisance hepatique, alcoolisme chronique et syndrome de Gilbert : ne jamais depasser 2000 mg de paracetamol par jour.",
+        "output": {"medicament": "Doliprane 1000mg", "population": "insuffisance hepatique, alcoolisme chronique, syndrome de Gilbert", "dose_max_prise": None, "intervalle_minimum": None, "dose_max_jour": "2000 mg"}
+    },
+    {
+        "input": "Adulte pesant moins de 50 kg, malnutrition chronique, deshydratation, personnes agees : demandez conseil a votre medecin ou votre pharmacien.",
+        "output": {"medicament": "Doliprane 1000mg", "population": "adulte moins de 50kg, malnutrition, deshydratation, personnes agees", "dose_max_prise": None, "intervalle_minimum": None, "dose_max_jour": None, "note": "consulter un medecin, pas de dose fixe"}
+    },
+    {
+        "input": "Ce medicament est reserve a l'adulte. La dose habituelle est de 1 sachet par jour. Votre medecin vous indiquera combien de sachets vous devez prendre chaque jour.",
+        "output": {"medicament": "Kardegic 160mg", "population": "adulte", "dose_max_prise": "1 sachet", "intervalle_minimum": None, "dose_max_jour": None, "note": "dose exacte prescrite par le medecin"}
+    },
+    {
+        "input": "Chez l'enfant de 20 a 30 kg (environ 6 a 11 ans) : 1 comprime (200 mg), a renouveler si besoin au bout de 6 heures. Ne pas depasser 3 comprimes par jour (600 mg).",
+        "output": {"medicament": "Ibuprofene 200mg", "population": "enfant 20-30kg (6-11 ans)", "dose_max_prise": "200 mg (1 comprime)", "intervalle_minimum": "6 heures", "dose_max_jour": "600 mg"}
+    },
+    {
+        "input": "Chez l'adulte et l'enfant de plus de 30 kg (environ 11-12 ans) : 1 a 2 comprimes (200 mg), a renouveler si besoin au bout de 6 heures. Ne pas depasser 6 comprimes par jour (1200 mg).",
+        "output": {"medicament": "Ibuprofene 200mg", "population": "adulte et enfant plus de 30kg", "dose_max_prise": "400 mg (2 comprimes)", "intervalle_minimum": "6 heures", "dose_max_jour": "1200 mg"}
+    },
+    {
+        "input": "Prendre 1 lyophilisat oral, au moment de la crise. Renouveler en cas de spasmes importants en respectant un intervalle minimum de 2 heures entre chaque prise sans depasser 3 lyophilisats oraux par jour.",
+        "output": {"medicament": "Spasfon Lyoc 160mg", "population": "adulte (non adapte a l'enfant)", "dose_max_prise": "1 lyophilisat", "intervalle_minimum": "2 heures", "dose_max_jour": "3 lyophilisats"}
+    },
+    {
+        "input": "Adultes et enfants de 40 kg et plus. Dose habituelle : 1 sachet trois fois par jour. Dose inferieure : 1 sachet deux fois par jour.",
+        "output": {"medicament": "Augmentin 1g/125mg", "population": "adultes et enfants 40kg et plus", "dose_max_prise": "1 sachet", "intervalle_minimum": None, "dose_max_jour": "3 sachets (dose habituelle)"}
+    },
+    {
+        "input": "Enfants pesant moins de 40 kg. Dose recommandee : 40 mg/5 mg a 80 mg/10 mg par kg de poids corporel et par jour, en trois fois.",
+        "output": {"medicament": "Amoxicilline acide clavulanique", "population": "enfants moins de 40kg", "dose_max_prise": "variable selon poids, en 3 prises", "intervalle_minimum": None, "dose_max_jour": "40-80 mg/kg/jour"}
+    },
+    {
+        "input": "Reserve a l'adulte. La posologie est strictement individuelle et il n'est pas possible de definir une dose usuelle. Conformez-vous a la prescription de votre medecin traitant.",
+        "output": {"medicament": "Xanax 0.25mg", "population": "adulte", "dose_max_prise": None, "intervalle_minimum": None, "dose_max_jour": None, "note": "posologie strictement individuelle, prescription medicale obligatoire"}
+    },
+]
+
+with open("dataset_posologie.jsonl", "w", encoding="utf-8") as f:
+    for ex in exemples:
+        f.write(json.dumps(ex, ensure_ascii=False) + "\n")
+
+print(f"{len(exemples)} exemples reels ecrits dans dataset_posologie.jsonl")

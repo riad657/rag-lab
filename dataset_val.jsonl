@@ -1,0 +1,1 @@
+{"input": "Chez l'enfant de 20 a 30 kg (environ 6 a 11 ans) : 1 comprime (200 mg), a renouveler si besoin au bout de 6 heures. Ne pas depasser 3 comprimes par jour (600 mg).", "output": {"medicament": "Ibuprofene 200mg", "population": "enfant 20-30kg (6-11 ans)", "dose_max_prise": "200 mg (1 comprime)", "intervalle_minimum": "6 heures", "dose_max_jour": "600 mg"}}
