@@ -23,7 +23,7 @@ exemples = [
     },
     {
         "input": "Chez l'adulte et l'enfant de plus de 30 kg (environ 11-12 ans) : 1 a 2 comprimes (200 mg), a renouveler si besoin au bout de 6 heures. Ne pas depasser 6 comprimes par jour (1200 mg).",
-        "output": {"medicament": "Ibuprofene 200mg", "population": "adulte et enfant plus de 30kg", "dose_max_prise": "400 mg (2 comprimes)", "intervalle_minimum": "6 heures", "dose_max_jour": "1200 mg"}
+        "output": {"medicament": "Ibuprofene 200mg", "population": "adulte et enfant plus de 30kg", "dose_max_prise": "1 a 2 comprimes (200 mg)", "intervalle_minimum": "6 heures", "dose_max_jour": "1200 mg"}
     },
     {
         "input": "Prendre 1 lyophilisat oral, au moment de la crise. Renouveler en cas de spasmes importants en respectant un intervalle minimum de 2 heures entre chaque prise sans depasser 3 lyophilisats oraux par jour.",
