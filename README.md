@@ -25,3 +25,7 @@ Statut : Phase 1 terminée.
 | Chunking structurel (découpage par rubrique) | 0.767 | 0.656 | 2026-09-08 |
 
 **Décision 2.4** : nette progression du chunking structurel comparé au chunking naïf (+0.134 recall@3, +0.134 MRR) — on conserve le chunking structurel comme base pour la suite des améliorations (2.5, 2.6). Échecs restants (7/30) concentrés sur Amoxicilline/Augmentin, deux antibiotiques chimiquement proches — plus un problème de proximité sémantique légitime qu'un défaut de chunking, à traiter en 2.5/2.6.
+
+| Hybride BM25 + dense (fusion des scores) | 0.833 | 0.794 | 2026-09-09 |
+
+**Décision 2.5** : nette progression avec l'hybride BM25+dense (+0.066 recall@3, +0.138 MRR vs structurel seul). On conserve l'hybride. 5 échecs restants concentrent tous sur le couple Amoxicilline/Augmentin — vérifié empiriquement : le mot "amoxicilline" apparaît littéralement dans la notice Augmentin (association amoxicilline + acide clavulanique), rendant la confusion inévitable pour toute méthode par mots-clés ou par sens, sans connaissance externe du nom commercial exact.
