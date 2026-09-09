@@ -29,3 +29,7 @@ Statut : Phase 1 terminée.
 | Hybride BM25 + dense (fusion des scores) | 0.833 | 0.794 | 2026-09-09 |
 
 **Décision 2.5** : nette progression avec l'hybride BM25+dense (+0.066 recall@3, +0.138 MRR vs structurel seul). On conserve l'hybride. 5 échecs restants concentrent tous sur le couple Amoxicilline/Augmentin — vérifié empiriquement : le mot "amoxicilline" apparaît littéralement dans la notice Augmentin (association amoxicilline + acide clavulanique), rendant la confusion inévitable pour toute méthode par mots-clés ou par sens, sans connaissance externe du nom commercial exact.
+
+| Reranking cross-encoder (top-10 → rerank → top-3) | 0.867 | 0.850 | 2026-09-09 |
+
+**Décision 2.6** : gain marginal avec le reranking (+0.034 recall@3, +0.056 MRR) comparé au coût introduit (latence moyenne 199ms/question, contre quasi-instantané pour l'hybride seul) et à l'apparition d'un nouvel échec (Q17, absent avec l'hybride simple). Le reranking corrige 2 cas mais en casse 1 — pas strictement supérieur, juste différent. Décision : reranking NON conservé pour la suite du projet ; l'hybride BM25+dense (2.5) reste la version retenue, meilleur rapport gain/coût de toute la phase 2B.
