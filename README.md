@@ -53,3 +53,13 @@ Statut : Phase 1 terminée.
 **Faisabilité du dataset** : différence décisive. Les notices contiennent déjà, littéralement, l'information de posologie structurée (ex: tableaux poids/dose/intervalle vus en 0.5c) — un dataset pour (a) est auto-extractible du texte source. Pour (b), aucun label de gravité n'existe dans les notices ; il faudrait annoter chaque interaction manuellement, sans expertise pharmaceutique, ce qui introduirait un vrai risque d'erreur dans le dataset d'entraînement lui-même.
 
 **Verdict** : (b) serait le choix pertinent en situation réelle, avec le temps et l'expertise pour annoter correctement. Dans le cadre de cet apprentissage, (a) offre un dataset fiable et rapide à construire, permettant de bien exécuter les étapes 3.1 à 3.5 sans que la qualité du fine-tuning soit polluée par des labels de départ discutables.
+
+## Phase 3 — Fine-tuning
+
+### 3.1 — Dataset
+
+Extraction automatique de la section Posologie sur les 15 notices (12/15 trouvées via le chunking structurel de 2.4 ; Smecta, Ventoline, Amlor non détectés, à creuser si besoin). Socle de 10 exemples réels construits à la main (texte source → JSON structuré), couvrant les deux cas observés : dose chiffrée exploitable (ex: Doliprane, Ibuprofène) et absence de dose fixe avec renvoi médecin (ex: Kardegic, Xanax) — le modèle doit apprendre à représenter les deux honnêtement, pas halluciner un chiffre absent.
+
+Split train/val/test (7/1/2) figé avant toute génération de volume supplémentaire, pour éviter toute fuite de données entre reformulations proches d'un même exemple.
+
+**Volume restant à générer** : 10/300-500 exemples réels obtenus directement du texte source. Le reste sera généré par reformulation (piste 2) du texte d'entrée, JSON de sortie identique, appliqué uniquement sur train/val — le test set (2 exemples) reste intouché jusqu'à 3.5.
