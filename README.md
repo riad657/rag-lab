@@ -41,3 +41,15 @@ Statut : Phase 1 terminée.
 **Ce qui est jeté** : reranking cross-encoder (2.6). Gain trop marginal (+0.034 recall@3, +0.056 MRR) par rapport au coût en vitesse de réponse (199ms/question sur CPU, contre quasi-instantané sans).
 
 **Avec un budget GPU** : deux changements. (1) Passer sur un modèle d'embedding plus grand que le MiniLM actuel, pour capter des nuances sémantiques plus fines (utile notamment sur le couple Amoxicilline/Augmentin). (2) Réintégrer le reranking : un GPU absorberait le sacrifice en vitesse actuellement rédhibitoire sur CPU, rendant le gain de précision du cross-encoder rentable sans coût perçu par l'utilisateur.
+
+## Phase 3 — CHECKPOINT DÉCISION D3
+
+**Choix retenu : (a) extraction structurée de la posologie en JSON.**
+
+**Utilité produit** : (b) classification de gravité d'interaction serait plus directement utile — les interactions sont le point faible récurrent du retrieval (D1, D2), et les questions les plus critiques pour un utilisateur. Mais (a) reste utile : structurer la posologie en JSON est une brique concrète pour tout produit qui affiche des doses de façon fiable.
+
+**Mesurabilité** : (a) a une réponse vérifiable objectivement (le JSON extrait correspond ou non au texte source). (b) nécessiterait de définir soi-même une échelle de gravité, avec un risque de subjectivité.
+
+**Faisabilité du dataset** : différence décisive. Les notices contiennent déjà, littéralement, l'information de posologie structurée (ex: tableaux poids/dose/intervalle vus en 0.5c) — un dataset pour (a) est auto-extractible du texte source. Pour (b), aucun label de gravité n'existe dans les notices ; il faudrait annoter chaque interaction manuellement, sans expertise pharmaceutique, ce qui introduirait un vrai risque d'erreur dans le dataset d'entraînement lui-même.
+
+**Verdict** : (b) serait le choix pertinent en situation réelle, avec le temps et l'expertise pour annoter correctement. Dans le cadre de cet apprentissage, (a) offre un dataset fiable et rapide à construire, permettant de bien exécuter les étapes 3.1 à 3.5 sans que la qualité du fine-tuning soit polluée par des labels de départ discutables.
