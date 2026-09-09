@@ -33,3 +33,11 @@ Statut : Phase 1 terminée.
 | Reranking cross-encoder (top-10 → rerank → top-3) | 0.867 | 0.850 | 2026-09-09 |
 
 **Décision 2.6** : gain marginal avec le reranking (+0.034 recall@3, +0.056 MRR) comparé au coût introduit (latence moyenne 199ms/question, contre quasi-instantané pour l'hybride seul) et à l'apparition d'un nouvel échec (Q17, absent avec l'hybride simple). Le reranking corrige 2 cas mais en casse 1 — pas strictement supérieur, juste différent. Décision : reranking NON conservé pour la suite du projet ; l'hybride BM25+dense (2.5) reste la version retenue, meilleur rapport gain/coût de toute la phase 2B.
+
+## CHECKPOINT DÉCISION D2
+
+**Ce qui est gardé** : chunking structurel (2.4) + recherche hybride BM25+dense (2.5), version finale du retrieval pour la suite du projet (recall@3=0.833, MRR=0.794).
+
+**Ce qui est jeté** : reranking cross-encoder (2.6). Gain trop marginal (+0.034 recall@3, +0.056 MRR) par rapport au coût en vitesse de réponse (199ms/question sur CPU, contre quasi-instantané sans).
+
+**Avec un budget GPU** : deux changements. (1) Passer sur un modèle d'embedding plus grand que le MiniLM actuel, pour capter des nuances sémantiques plus fines (utile notamment sur le couple Amoxicilline/Augmentin). (2) Réintégrer le reranking : un GPU absorberait le sacrifice en vitesse actuellement rédhibitoire sur CPU, rendant le gain de précision du cross-encoder rentable sans coût perçu par l'utilisateur.
