@@ -65,3 +65,26 @@ Split train/val/test (7/1/2) figé avant toute génération de volume supplémen
 **Volume restant à générer** : 10/300-500 exemples réels obtenus directement du texte source. Le reste sera généré par reformulation (piste 2) du texte d'entrée, JSON de sortie identique, appliqué uniquement sur train/val — le test set (2 exemples) reste intouché jusqu'à 3.5.
 
 **Décision volume dataset** : 44 exemples au total (41 train / 1 val / 2 test), en dessous de la fourchette indicative 300-500 du programme. Décision assumée : plutôt que de multiplier les reformulations par exemple (risque de redondance croissante — les variations tardives d'un même texte source deviennent de moins en moins distinctes), on privilégie un dataset plus petit mais entièrement vérifié (chaque reformulation contrôlée automatiquement contre falsification de chiffres, 1 seul rejet sur 35 générées). Cohérent avec la décision déjà prise en 1.1 (15 vs 20 documents) : questionner un volume cible du programme avec justification plutôt que le suivre aveuglément.
+
+## Installation et test (pour un tiers)
+
+Pour cloner et tester ce projet depuis zero :
+
+**Cle API requise** : le fichier `.env` (contenant `ANTHROPIC_API_KEY=...`) n'est pas inclus dans le depot pour des raisons de securite. Pour tester `assistant.py`, creer un fichier `.env` a la racine du projet avec votre propre cle API Anthropic (console.anthropic.com), format :
+ANTHROPIC_API_KEY=votre-cle-ici
+
+Commandes d'installation completes :
+
+    git clone https://github.com/riad657/rag-lab.git
+    cd rag-lab
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
+Lancer l'assistant interactif :
+
+    python3 assistant.py
+
+Tapez une question, ou "quitter" pour arreter.
+
+Note : assistant.py utilise le retrieval structurel (phase 1). La version finale amelioree (hybride BM25+dense, phase 2.5, recall@3=0.833) est disponible dans 2.5_hybride.py, utilisable pour reproduire les metriques du tableau ci-dessus.
