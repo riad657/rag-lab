@@ -110,3 +110,17 @@ Entrainement : 3 epochs sur 41 exemples train / 1 val, ~50 secondes sur GPU T4. 
 Adaptateurs sauvegardes : 15 Mo (dossier modele_finetune_posologie/), a charger par-dessus le modele de base pour reutilisation.
 
 Incident : session Colab reinitialisee entre deux cellules (dossier clone et modele entraine perdus). Reentrainement complet refait a l'identique, resultats de loss quasi identiques au premier essai - confirme la reproductibilite.
+
+### 3.4-3.5 - Evaluation et verdict final
+
+Comparaison sur le test set fige (2 exemples), score = pourcentage de champs au format attendu (texte avec unite, hors champ medicament non deductible) :
+
+| Modele | Score format |
+|---|---|
+| Qwen2.5-1.5B zero-shot | 25% (2/8) |
+| Claude Sonnet zero-shot | 75% (6/8) |
+| Qwen2.5-1.5B fine-tune (QLoRA) | 12% (1/8) |
+
+**Verdict (3.5)** : le fine-tuning ne bat PAS la baseline zero-shot du meme modele - il regresse legerement (25% vers 12%). Resultat documente comme valide, pas cache. Hypothese principale : dataset d'entrainement trop petit (41 exemples) et repetitif (nombreuses reformulations d'un meme texte source), probable sur-ajustement (overfitting) sur des motifs superficiels plutot qu'apprentissage de la regle generale de formatage visee.
+
+**Conclusion produit** : sur cette tache precise (extraction structuree), un gros modele generaliste utilise en zero-shot (Claude) surpasse largement un petit modele fine-tune sur un dataset restreint. Avec un dataset plus large (300-500 exemples vises initialement, cf. 3.1i) et plus varie, ce verdict pourrait s'inverser - mais ce n'est pas ce qui a ete mesure ici.
