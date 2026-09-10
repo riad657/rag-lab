@@ -1,52 +1,45 @@
-import chromadb
-from chromadb.utils import embedding_functions
+import importlib.util
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
 load_dotenv()
+client = Anthropic()
 
-modele_fr = embedding_functions.SentenceTransformerEmbeddingFunction(
-    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-)
+spec = importlib.util.spec_from_file_location("hybride", "2.5_hybride.py")
+hybride = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(hybride)
 
-client_chroma = chromadb.PersistentClient(path="./chroma_db")
-collection = client_chroma.get_collection(name="notices", embedding_function=modele_fr)
+id_vers_texte = dict(zip(hybride.tous_ids, hybride.tous_chunks))
 
-client_claude = Anthropic()
-
-def repondre(question, n_chunks=3):
-    resultats = collection.query(query_texts=[question], n_results=n_chunks)
-    chunks_trouves = resultats["documents"][0]
-    ids_trouves = resultats["ids"][0]
-
+def repondre(question, k=3):
+    ids_trouves = hybride.recherche_hybride(question, k=k)
     contexte = ""
-    for i, (chunk, chunk_id) in enumerate(zip(chunks_trouves, ids_trouves)):
-        contexte += f"[Source {i+1} - {chunk_id}]\n{chunk}\n\n"
+    for i, cid in enumerate(ids_trouves):
+        contexte += f"[Source {i+1} - {cid}]\n{id_vers_texte[cid]}\n\n"
 
-    prompt = f"""Tu es un assistant qui répond à des questions sur des médicaments, en te basant UNIQUEMENT sur les extraits de notices fournis ci-dessous.
+    prompt = f"""Tu es un assistant qui repond a des questions sur des medicaments, en te basant UNIQUEMENT sur les extraits fournis.
 
-Règles strictes :
-- Réponds uniquement à partir des extraits fournis, jamais de tes connaissances générales.
-- Cite la source utilisée entre crochets, par exemple [Source 1].
-- Si les extraits ne contiennent pas l'information demandée, dis-le clairement : "Je ne trouve pas cette information dans les extraits fournis."
+Regles strictes :
+- Reponds uniquement a partir des extraits fournis.
+- Cite la source entre crochets, ex: [Source 1].
+- Si l'info n'y est pas, dis-le clairement : "Je ne trouve pas cette information dans les extraits fournis."
 
-EXTRAITS :
+EXTRAITS:
 {contexte}
 
 QUESTION : {question}
 
-RÉPONSE :"""
+REPONSE :"""
 
-    reponse = client_claude.messages.create(
+    reponse = client.messages.create(
         model="claude-sonnet-4-5",
         max_tokens=500,
         messages=[{"role": "user", "content": prompt}]
     )
-
     return reponse.content[0].text
 
-print("=== Assistant RAG-LAB — Questions sur les médicaments ===")
-print("Tapez votre question, ou 'quitter' pour arrêter.\n")
+print("=== Assistant RAG-LAB (retrieval hybride BM25+dense) ===")
+print("Tapez votre question, ou 'quitter' pour arreter.\n")
 
 while True:
     question = input("Votre question : ")
