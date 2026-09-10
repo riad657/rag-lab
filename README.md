@@ -100,3 +100,13 @@ Deux baselines posees sur le test set fige (2 exemples), avant toute etape d'ent
 **Limite identifiee du dataset** : le champ "medicament" n'est deductible par AUCUN modele en zero-shot, puisque cette information n'apparait jamais dans le texte d'entree fourni (elle provient d'un contexte externe ajoute lors de la construction du socle en 3.1). A exclure de l'evaluation de fidelite en 3.4, ou a retirer du schema cible.
 
 **Objectif du fine-tuning (3.3)** : pas d'apprendre a extraire l'information (deja fait par les deux baselines), mais d'apprendre a respecter EXACTEMENT le format de sortie attendu — c'est l'ecart precis observe chez Qwen 1.5B.
+
+### 3.3 - Entrainement QLoRA (Colab T4)
+
+Modele de base : Qwen2.5-1.5B-Instruct, quantifie en 4 bits. Configuration LoRA (r=8, target_modules=q_proj/v_proj) : 1 089 536 parametres entrainables sur 1 544 803 840 au total, soit 0.0705 pourcent du modele - le reste reste gele, evitant l'oubli catastrophique.
+
+Entrainement : 3 epochs sur 41 exemples train / 1 val, ~50 secondes sur GPU T4. Loss training 2.27 vers 2.00, loss validation 1.94 vers 1.76 - descente reguliere sans divergence.
+
+Adaptateurs sauvegardes : 15 Mo (dossier modele_finetune_posologie/), a charger par-dessus le modele de base pour reutilisation.
+
+Incident : session Colab reinitialisee entre deux cellules (dossier clone et modele entraine perdus). Reentrainement complet refait a l'identique, resultats de loss quasi identiques au premier essai - confirme la reproductibilite.
