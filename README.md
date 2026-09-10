@@ -138,8 +138,6 @@ Tapez une question, ou quitter pour arreter.
 
 ## Phase 4 - Packaging et soutenance
 
-### 4.1 - README final
-Reorganise en structure de lecture (resume, architecture, decisions, metriques, limites, suites) plutot qu'en journal chronologique par phase.
 
 ### 4.2 - Tests automatises
 4 tests pytest sur le retrieval hybride (version reellement retenue, pas le structurel seul) : bon document trouve sur une question simple, nombre de resultats respecte, pas de plantage sur question vide, corpus non vide. 4/4 passent (test_retrieval.py).
