@@ -4,6 +4,10 @@ Assistant de questions-reponses sur les medicaments, construit a partir des donn
 
 **Statut : Phase 4 (packaging) en cours. Phases 0 a 3 terminees.**
 
+## Demonstration
+
+![Demo RAG-LAB](demo.gif)
+
 ## Resume (pour un lecteur non technique)
 
 Ce projet repond a une question simple : peut-on construire un assistant qui repond de facon fiable a des questions sur des medicaments (posologie, contre-indications, interactions), a partir de leurs notices officielles ?
