@@ -1,4 +1,4 @@
-# RAG-LAB
+contenu = """# RAG-LAB
 
 Assistant de questions-reponses sur les medicaments, construit a partir des donnees publiques BDPM/ANSM.
 
@@ -135,3 +135,9 @@ Lancer l'assistant interactif :
     python3 assistant.py
 
 Tapez une question, ou quitter pour arreter.
+"""
+
+with open("README.md", "w", encoding="utf-8") as f:
+    f.write(contenu)
+
+print("README.md reecrit :", len(contenu.splitlines()), "lignes")
