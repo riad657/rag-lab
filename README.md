@@ -88,3 +88,15 @@ Lancer l'assistant interactif :
 Tapez une question, ou "quitter" pour arreter.
 
 Note : assistant.py utilise le retrieval structurel (phase 1). La version finale amelioree (hybride BM25+dense, phase 2.5, recall@3=0.833) est disponible dans 2.5_hybride.py, utilisable pour reproduire les metriques du tableau ci-dessus.
+
+### 3.2 — Baselines zero-shot (avant tout entrainement)
+
+Deux baselines posees sur le test set fige (2 exemples), avant toute etape d'entrainement :
+
+**Qwen2.5-1.5B-Instruct (zero-shot)** : capte correctement les valeurs numeriques (dose, intervalle) mais ne respecte pas le format demande (nombres bruts au lieu de texte avec unite, ex: 1000 au lieu de "1000 mg") et invente une structure population non demandee (objets age/poids/genre au lieu d'une simple chaine texte).
+
+**Claude Sonnet (zero-shot)** : respecte parfaitement le format JSON demande sur les deux exemples (texte avec unite), reste honnete sur le champ medicament absent du texte source ("non specifie" plutot qu'invente).
+
+**Limite identifiee du dataset** : le champ "medicament" n'est deductible par AUCUN modele en zero-shot, puisque cette information n'apparait jamais dans le texte d'entree fourni (elle provient d'un contexte externe ajoute lors de la construction du socle en 3.1). A exclure de l'evaluation de fidelite en 3.4, ou a retirer du schema cible.
+
+**Objectif du fine-tuning (3.3)** : pas d'apprendre a extraire l'information (deja fait par les deux baselines), mais d'apprendre a respecter EXACTEMENT le format de sortie attendu — c'est l'ecart precis observe chez Qwen 1.5B.
